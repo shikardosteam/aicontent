@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как психологу создать 60 единиц продающего контента за 2 дня с помощью ИИ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #faf7f2; --warm: #f5efe6; --sage: #8a9e8a; --sage-light: #c5d4c5;
+      --brown: #6b4f3a; --brown-light: #c4a882; --dark: #1e1a16; --dark2: #2d2520;
+      --text: #3d3530; --text-light: #7a6e68; --white: #ffffff; --accent: #c4956a;
+      --green: #7ecb9a; --red: #ff7b7b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; background: var(--dark);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 80px 24px 100px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(196,149,106,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(138,158,138,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,149,106,0.12); border: 1px solid rgba(196,149,106,0.25);
+      color: var(--brown-light); font-size: 11px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 9px 20px; border-radius: 100px; margin-bottom: 36px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 6vw, 72px); line-height: 1.08;
+      color: var(--white); margin-bottom: 20px;
+      animation: fadeUp 0.7s 0.1s ease both; max-width: 860px;
+    }
+    .hero-title em { font-style: italic; color: var(--brown-light); }
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.5);
+      margin-bottom: 48px; animation: fadeUp 0.7s 0.2s ease both;
+      max-width: 540px; line-height: 1.75;
+    }
+    .hero-subtitle strong { color: rgba(255,255,255,0.85); }
+    .hero-stats {
+      display: flex; margin-bottom: 52px;
+      animation: fadeUp 0.7s 0.3s ease both; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-stat { padding: 16px 28px; border-right: 1px solid rgba(255,255,255,0.08); text-align: center; }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 42px; font-style: italic; color: var(--brown-light); line-height: 1; margin-bottom: 7px; }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .btn-primary {
+      display: inline-block; background: var(--accent); color: var(--white);
+      font-size: 15px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 18px 48px; border-radius: 100px; border: none; cursor: pointer;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(196,149,106,0.35); background: #d4a678; }
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.2); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      animation: bounce 2s infinite; pointer-events: none;
+    }
+    .scroll-hint::after { content: ''; width: 1px; height: 32px; background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); }
+
+    /* LAYOUT */
+    .section { padding: 64px 24px; }
+    .section-warm { background: var(--warm); }
+    .section-white { background: var(--white); }
+    .section-dark { background: var(--dark); }
+    .container { max-width: 820px; margin: 0 auto; }
+    .container-wide { max-width: 1060px; margin: 0 auto; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4.5vw, 50px); line-height: 1.15; color: var(--dark); margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .section-title-light { color: var(--white); }
+    .section-title-light em { color: var(--brown-light); }
+    .section-text { font-size: 16px; line-height: 1.75; color: var(--text-light); max-width: 620px; }
+    .section-text-light { color: rgba(255,255,255,0.45); }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 48px; }
+    .gallery-item { position: relative; overflow: hidden; background: var(--dark2); aspect-ratio: 16/10; cursor: zoom-in; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform 0.4s ease; display: block; }
+    .gallery-item:hover img { transform: scale(1.03); }
+    .gallery-item:hover .gallery-zoom { opacity: 1; }
+    .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.82)); color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 500; padding: 28px 16px 14px; line-height: 1.4; }
+    .gallery-zoom { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.5); color: white; font-size: 14px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+    .gallery-item.wide { grid-column: span 1; }
+    .gallery-item.tall { aspect-ratio: 16/10; }
+
+    /* FOR WHOM */
+    .forwho-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 40px; }
+    .forwho-item { background: var(--warm); border: 1px solid rgba(138,158,138,0.2); border-radius: 10px; padding: 16px 20px; font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; transition: background 0.2s, border-color 0.2s; }
+    .forwho-item:hover { background: var(--sage-light); border-color: var(--sage); }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+    .lightbox-close { position: fixed; top: 20px; right: 24px; color: rgba(255,255,255,0.6); font-size: 32px; cursor: pointer; line-height: 1; z-index: 1001; transition: color 0.2s; }
+    .lightbox-close:hover { color: white; }
+
+    /* HOW IT WORKS */
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3px; margin-top: 52px; }
+    .how-card { background: var(--cream); padding: 36px 28px; position: relative; }
+    .how-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--sage-light); }
+    .how-card-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .how-card-title { font-weight: 700; font-size: 15px; color: var(--dark); margin-bottom: 10px; }
+    .how-card-text { font-size: 14px; line-height: 1.7; color: var(--text-light); }
+
+    /* VIDEO */
+    .video-wrap { margin-top: 48px; background: var(--dark2); border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.06); }
+    .video-placeholder { text-align: center; padding: 48px; }
+    .video-placeholder-icon { font-size: 56px; opacity: 0.35; margin-bottom: 16px; }
+    .video-placeholder-title { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .video-placeholder-sub { font-size: 13px; color: rgba(255,255,255,0.25); line-height: 1.6; }
+
+    /* MATERIALS */
+    .materials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 48px; }
+    .material-item { border: 1px solid rgba(138,158,138,0.2); border-radius: 12px; padding: 28px; background: var(--white); position: relative; overflow: hidden; }
+    .material-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--sage); }
+    .material-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .material-title { font-weight: 700; font-size: 15px; color: var(--dark); margin-bottom: 8px; }
+    .material-text { font-size: 13px; line-height: 1.6; color: var(--text-light); }
+    .material-link { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+    .material-link:hover { text-decoration: underline; }
+
+    /* PRICE */
+    .price-block { background: var(--dark); padding: 48px; margin-top: 52px; border-radius: 4px; }
+    .price-block-title { font-family: 'Playfair Display', serif; font-size: 24px; font-style: italic; color: var(--brown-light); margin-bottom: 6px; }
+    .price-block-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 28px; line-height: 1.6; }
+    .price-rows { display: flex; flex-direction: column; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; }
+    .price-row:last-child { border-bottom: none; }
+    .price-row-label { color: rgba(255,255,255,0.5); }
+    .price-row-value { font-weight: 700; color: var(--white); font-size: 16px; }
+    .price-row-total { margin-top: 4px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12) !important; border-bottom: none !important; }
+    .price-row-total .price-row-label { color: rgba(255,255,255,0.85); font-weight: 600; }
+    .price-row-total .price-row-value { color: var(--red); font-size: 22px; }
+    .price-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .price-vs-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; }
+    .price-vs-box.winner { background: rgba(196,149,106,0.1); border-color: rgba(196,149,106,0.3); }
+    .price-vs-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
+    .price-vs-box.winner .price-vs-label { color: rgba(196,149,106,0.6); }
+    .price-vs-amount { font-family: 'Playfair Display', serif; font-size: 34px; font-style: italic; }
+    .price-vs-box .price-vs-amount { color: var(--red); }
+    .price-vs-box.winner .price-vs-amount { color: var(--brown-light); }
+    .price-vs-note { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 6px; }
+    .price-saving { margin-top: 14px; background: rgba(126,203,154,0.1); border: 1px solid rgba(126,203,154,0.2); border-radius: 10px; padding: 20px 24px; text-align: center; }
+    .price-saving-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    .price-saving-amount { font-family: 'Playfair Display', serif; font-size: 40px; font-style: italic; color: var(--green); }
+    .price-saving-note { font-size: 12px; color: rgba(255,255,255,0.25); margin-top: 4px; }
+
+    /* TARIFF */
+    .tariff-block { background: var(--dark2); padding: 48px; margin-top: 52px; border-radius: 4px; position: relative; overflow: hidden; }
+    .tariff-block::before { content: 'ELITE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Playfair Display', serif; font-size: 120px; color: rgba(255,255,255,0.02); pointer-events: none; }
+    .tariff-badge { display: inline-block; background: var(--accent); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; }
+    .tariff-title { font-family: 'Playfair Display', serif; font-size: 34px; color: var(--white); margin-bottom: 8px; font-style: italic; }
+    .tariff-subtitle { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 32px; }
+    .tariff-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+    .tariff-feature { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .tariff-feature::before { content: '✓'; color: var(--sage); font-weight: 700; flex-shrink: 0; }
+    .tariff-prices { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tariff-price { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 18px 22px; border-radius: 8px; }
+    .tariff-price.best { border-color: var(--accent); background: rgba(196,149,106,0.08); }
+    .tariff-price-amount { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--white); font-style: italic; }
+    .tariff-price.best .tariff-price-amount { color: var(--brown-light); }
+    .tariff-price-period { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+    .tariff-discount { display: inline-block; background: rgba(138,158,138,0.2); color: var(--sage-light); font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; margin-top: 6px; }
+
+    /* REGISTER STEPS */
+    .register-block { background: rgba(196,149,106,0.06); border: 1px solid rgba(196,149,106,0.15); border-radius: 12px; padding: 36px; margin-top: 0; }
+    .register-title { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: var(--brown-light); margin-bottom: 24px; }
+    .register-steps { display: flex; flex-direction: column; gap: 16px; }
+    .register-step { display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start; }
+    .register-step-num { width: 36px; height: 36px; border-radius: 50%; background: rgba(196,149,106,0.15); border: 1px solid rgba(196,149,106,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: var(--brown-light); flex-shrink: 0; }
+    .register-step-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; padding-top: 6px; }
+    .register-step-text strong { color: rgba(255,255,255,0.9); }
+    .register-step-text a { color: var(--brown-light); text-decoration: none; }
+    .register-step-text a:hover { text-decoration: underline; }
+    .register-warning { margin-top: 20px; padding: 14px 18px; background: rgba(255,123,123,0.07); border-left: 3px solid rgba(255,123,123,0.35); font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.65; border-radius: 0 6px 6px 0; }
+    .register-warning strong { color: rgba(255,123,123,0.75); }
+
+    /* CTA */
+    .cta-section { padding: 80px 24px; background: var(--dark); text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(196,149,106,0.08) 0%, transparent 70%); }
+    .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5.5vw, 64px); color: var(--white); line-height: 1.1; margin-bottom: 20px; font-style: italic; }
+    .cta-title span { color: var(--brown-light); }
+    .cta-text { font-size: 16px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 48px; line-height: 1.7; }
+
+    /* FOOTER */
+    footer { padding: 32px 24px; border-top: 1px solid rgba(255,255,255,0.06); background: var(--dark); text-align: center; font-size: 12px; color: rgba(255,255,255,0.2); letter-spacing: 0.5px; line-height: 2.2; }
+    footer a { color: var(--brown-light); text-decoration: none; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-videos { grid-template-columns: 1fr !important; }
+      .forwho-grid { grid-template-columns: 1fr 1fr; }
+      .price-vs { grid-template-columns: 1fr; }
+      .price-vs { grid-template-columns: 1fr; }
+      .tariff-prices { flex-direction: column; }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); width: 100%; max-width: 260px; }
+      .hero-stat:last-child { border-bottom: none; }
+      .price-block, .tariff-block, .register-block { padding: 24px 18px; }
+    }
+  </style>
+  <script type='text/javascript' src='https://api.netlify.com/7dhkIxcj1vZJOg9ZDJhXtLII2IgZ6-7jiDutH0hvnx5BP6kfLu5x32_yZxCgN7uP1LVqNLdA0dl27lZUrAOkD7o0T9eWi8Kr__DUja5qjR3h-ilSTsdhSNJ6VV5iHVek8RUGzQq1sr_Qvvfyi79PYm4huHbNy59ylFaUspA5P_acvbIyZV7fxHlkWwBVdtIYb8u8eayewBGS8XioKROLgMC-bj84LPbR-AqwlkyQM64JpsksEEAxGdOMpdsPhccngCoaRcomeEihkLZ57LicVA9OJn47cxVqXHL1G9xWhCMR-PaofsSotmT_RQQjYZUSDbm559jp9yiOT7Y6BparcaOKfs792hogsQV0KgUiJSfr_9Vm51W2Uurc4yEKUuDxOvjrq2UPAsi-4_v4SNuveflEnACvWShaOpMerd6IFQeNOj4B2qKrEMPxnMzjgL0qWOAsBQB-ORF9jTBvQfAihAyTrDN8mgJ7F6w-LVm2Qvx-8T2vEwZEShtmE9FbVZ7thAJtG81PCLQ2UzthQjOW'></script>
+</head>
+<body>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-tag">Для экспертов, которые продают свои услуги через контент</div>
+  <h1 class="hero-title">Как создать <em>60 единиц продающего контента</em><br>за 2 дня с помощью ИИ</h1>
+  <p class="hero-subtitle">
+    Профессиональные фото, карусели и Reels с вашим лицом —<br>
+    <strong>из одного домашнего снимка.</strong> Без фотографа, монтажёра и студии.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">60</div><div class="hero-stat-label">единиц контента</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">2</div><div class="hero-stat-label">рабочих дня</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">$0.75</div><div class="hero-stat-label">за 1 ед. контента</div></div>
+    
+  </div>
+  <button class="btn-primary" onclick="redirect()">Смотреть видео-инструкцию →</button>
+</section>
+
+<!-- 2. ПРИМЕРЫ РЕЗУЛЬТАТОВ -->
+<section class="section section-white">
+  <div class="container-wide">
+    <div class="container">
+      <div class="eyebrow reveal">Примеры результатов</div>
+      <h2 class="section-title reveal">Вот что вы научитесь <em>делать</em></h2>
+      <p class="section-text reveal">Реальные примеры контента, сгенерированного ИИ. Одно исходное фото — десятки профессиональных снимков, обложек, каруселей и видео.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/5.png" alt="8 профессиональных фото психолога из одного снимка" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">8 профессиональных фото из одного снимка — разные локации, образы, ракурсы</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/7.png" alt="До и после: одно домашнее фото → 8 разных образов" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">До и после: одно фото → 8 разных образов</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/8.png" alt="4 инструмента в одной цепочке" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">4 инструмента в одной цепочке — и этого достаточно</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/2.jpg" alt="Трансформации фото и видео через ИИ" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">Фото → новая локация. Видео + фото → говорящее видео</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/3.jpg" alt="Карусели в единой профессиональной стилистике" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">Карусели на 10 слайдов в единой стилистике — из одного промпта</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/10.png" alt="Фото + референс позы → готовый профессиональный кадр" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">Ваше фото + референс позы → готовый кадр</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/11.png" alt="Смена одежды в один промпт" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">Смена образа и одежды — в один промпт</div>
+      </div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)">
+        <img src="images/12.png" alt="Плохая и хорошая обложка для Reels" loading="lazy">
+        <div class="gallery-zoom">🔍</div>
+        <div class="gallery-caption">Кликабельные обложки для Reels и YouTube</div>
+      </div>
+    </div>
+
+    <!-- YouTube видео -->
+    <div class="gallery-videos reveal" style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px;">
+      <div style="position:relative; aspect-ratio:16/9; background:var(--dark2); overflow:hidden;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ffUU8nJghxA" title="Как работает Kling Motion Control 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));color:rgba(255,255,255,0.9);font-size:12px;font-weight:500;padding:28px 16px 14px;pointer-events:none;">Как работает Kling Motion Control — часть 1</div>
+      </div>
+      <div style="position:relative; aspect-ratio:16/9; background:var(--dark2); overflow:hidden;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/F9NSINco1-A" title="Как работает Kling Motion Control 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));color:rgba(255,255,255,0.9);font-size:12px;font-weight:500;padding:28px 16px 14px;pointer-events:none;">Как работает Kling Motion Control — часть 2</div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+      <img id="lightbox-img" src="" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- 3. ДЛЯ КОГО -->
+<section class="section section-white">
+  <div class="container">
+    <div class="eyebrow reveal">Для кого</div>
+    <h2 class="section-title reveal">Подойдёт всем, кто строит <em>личный бренд</em></h2>
+    <p class="section-text reveal">Если вы продаёте экспертизу и доверие к себе — этот инструмент для вас. Неважно ниша, язык или страна.</p>
+
+    <div class="forwho-grid reveal">
+      <div class="forwho-item">🧠 Психологи и психотерапевты</div>
+      <div class="forwho-item">🎯 Коучи — life, бизнес, карьерные</div>
+      <div class="forwho-item">🥗 Нутрициологи и диетологи</div>
+      <div class="forwho-item">🔮 Эзотерики, астрологи, таро-мастера</div>
+      <div class="forwho-item">👗 Стилисты и имидж-консультанты</div>
+      <div class="forwho-item">💪 Фитнес-тренеры и йога-инструкторы</div>
+      <div class="forwho-item">📚 Онлайн-педагоги и репетиторы</div>
+      <div class="forwho-item">⚖️ Юристы и финансовые консультанты</div>
+      <div class="forwho-item">🩺 Врачи с частной практикой</div>
+      <div class="forwho-item">💄 Визажисты и мастера красоты</div>
+      <div class="forwho-item">📈 Бизнес-консультанты и менторы</div>
+      <div class="forwho-item">🏠 Риелторы с личным брендом</div>
+    </div>
+  </div>
+</section>
+<section class="section section-warm">
+  <div class="container">
+    
+    <h2 class="section-title reveal">4 нужных инструмента в <em>одном месте</em></h2>
+    <p class="section-text reveal">Работаем внутри 1 сервиса, где собраны 90+ лучших нейросетей под любые задачи. Не нужно регистрироваться везде по отдельности — одна подписка закрывает весь процесс.</p>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-card-icon">🍌</div>
+        <div class="how-card-title">Nano Banana Pro — фото</div>
+        <p class="how-card-text">Загружаете своё фото, описываете локацию или образ промптом — получаете «реальный» профессиональный снимок в 4K. Одно исходное фото превращается в сотню разных кадров: разные места, одежда, ракурсы.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-card-icon">🎨</div>
+        <div class="how-card-title">Nano Banana Pro — инфографика и дизайн</div>
+        <p class="how-card-text">Создаёт дизайнерские посты-карусели, сторисы и обложки в единой профессиональной стилистике. Тема, структура, визуал — всё из одного промпта. Скорость — 200 дизайнерских картинок за 3 часа.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-card-icon">🎬</div>
+        <div class="how-card-title">Kling Motion Control — генерация видео</div>
+        <p class="how-card-text">Оживляет фото в видео. Домашнее фото или видео в халате превращается в профессиональный Reels за 1 мин. Исходное видео с полотенцем на голове — говорит вашим голосом, с макияжем, двигается в нужной локации, с красивой причёской и одеждой.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-card-icon">💬</div>
+        <div class="how-card-title">ChatGPT / Claude — тексты и промпты</div>
+        <p class="how-card-text">Пишет за вас посты, сценарии для видео, создаёт структуру каруселей, придумывает заголовки, хуки и адаптирует любой промпт под вашу внешность и стиль. Всё создаётся голосом или произвольным текстом — прямо внутри Syntx.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ВИДЕО-ИНСТРУКЦИЯ -->
+<section class="section section-white">
+  <div class="container">
+    <div class="eyebrow reveal">Видео-инструкция</div>
+    <h2 class="section-title reveal">Как создать 60 единиц контента <em>за 2 дня, без навыков и опыта</em></h2>
+    <p class="section-text reveal">Практический разбор без теорий. Показываем как и что делается — от регистрации до готового контента. Какая нейросеть за что отвечает, какие промпты использовать, где и что нажимать.</p>
+    <div class="video-wrap reveal">
+      <!-- Когда видео будет готово, замените содержимое div.video-wrap на:
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ВАШ_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+      -->
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">▶</div>
+        <div class="video-placeholder-title">Видео-инструкция скоро появится здесь</div>
+        <div class="video-placeholder-sub">Пошаговый разбор: от регистрации до 60 единиц готового контента.<br>Подпишитесь на <a href="https://t.me/shikardosteam" style="color:var(--brown-light);">@shikardosteam</a> — уведомим когда выйдет.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. МАТЕРИАЛЫ -->
+<section class="section section-warm">
+  <div class="container">
+    <div class="eyebrow reveal">Полезные материалы</div>
+    <h2 class="section-title reveal">Всё, чтобы вам было <em>проще</em></h2>
+    <p class="section-text reveal">Скачайте бесплатно, чтобы не потерять, и начните использовать прямо сейчас.</p>
+    <div class="materials-grid">
+      <div class="material-item reveal">
+        <span class="material-icon">📝</span>
+        <div class="material-title">200 промптов для нейрофотосессии</div>
+        <p class="material-text">Готовые профессиональные промпты: разные локации, одежда, ракурсы, сюжеты и образы. Берёте и используете — знать нейросети не нужно.</p>
+        <a href="https://docs.google.com/document/d/1Cq6QjhaDysnyjqgp6l63EJH3TZhuziyBGNp2hxG8hr8/edit?usp=sharing" target="_blank" class="material-link">Открыть документ →</a>
+      </div>
+      <div class="material-item reveal">
+        <span class="material-icon">🪄</span>
+        <div class="material-title">Мастер-промпт адаптер</div>
+        <p class="material-text">Отвечаете на 15 вопросов о своей внешности один раз — и Chat GPT адаптирует любой из 200 промптов под вас автоматически.</p>
+        <a href="https://docs.google.com/document/d/1lNWjXZB_otxUNGDDFKiDAFKMybaFdZe9hkThsVWUMZs/edit?usp=sharing" target="_blank" class="material-link">Открыть адаптер →</a>
+      </div>
+      <div class="material-item reveal">
+        <span class="material-icon">✅</span>
+        <div class="material-title">Чек-лист «60 единиц за 2 дня»</div>
+        <p class="material-text">Пошаговый план с таймингами по каждому этапу. День 1 — утро, день, вечер. День 2. Просто делайте по шагам.</p>
+        <a href="https://docs.google.com/document/d/1gIDxKlAoeW9r1aTmGN2MjujxfDZahCpzXbjo6YTl-xI/edit?usp=sharing" target="_blank" class="material-link">Скачать чек-лист →</a>
+      </div>
+      <div class="material-item reveal">
+        <span class="material-icon">🖼️</span>
+        <div class="material-title">50 референсов для фотосессии</div>
+        <p class="material-text">Подборка стильных фото для вдохновения. Позы, локации, образы. Используйте как референс при написании промпта.</p>
+        <a href="https://drive.google.com/drive/folders/1H5M5i5GhjKVOMYqmtAwHEndLHVoE4uMa?usp=sharing" target="_blank" class="material-link">Смотреть референсы →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. СРАВНЕНИЕ ЦЕН -->
+<section class="section section-white">
+  <div class="container">
+    <div class="eyebrow reveal">Экономика</div>
+    <h2 class="section-title reveal">Сколько стоит создать 60 единиц контента <em>без ИИ?</em></h2>
+    <p class="section-text reveal">Таблица средних цен по городам с населением 500 тыс. — 1 млн. человек. Учитывая цены на фриланс биржах.</p>
+    <div class="price-block reveal">
+      <div class="price-block-title">Стоимость профессионального контента на 1 месяц</div>
+      <div class="price-block-sub">20 фото + 20 постов-каруселей по 10 слайдов + 20 видео Reels. (Заказ у средних специалистов)</div>
+      <div class="price-rows">
+        <div class="price-row">
+          <span class="price-row-label">📸 20 удачных фото. Разные локации/студии/одежда (2 съёмки с фотографом)</span>
+          <span class="price-row-value">$200</span>
+        </div>
+        <div class="price-row">
+          <span class="price-row-label">💅 Подготовка × 2 раза: причёска + макияж + маникюр</span>
+          <span class="price-row-value">$100</span>
+        </div>
+        <div class="price-row">
+          <span class="price-row-label">🎬 Съёмка 20 Reels с монтажом + аренда одежды 4 образа ($20 за видео)</span>
+          <span class="price-row-value">$400</span>
+        </div>
+        <div class="price-row">
+          <span class="price-row-label">🎨 20 дизайнерских постов-каруселей по 10 слайдов. Фриланс ($10 за карусель)</span>
+          <span class="price-row-value">$200</span>
+        </div>
+        <div class="price-row price-row-total">
+          <span class="price-row-label">Итого в месяц / 60 единиц контента</span>
+          <span class="price-row-value">$900</span>
+        </div>
+        <div class="price-row" style="border-bottom:none; padding-top:8px;">
+          <span class="price-row-label" style="color:rgba(255,255,255,0.4); font-size:13px;">Себестоимость 1 единицы контента</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.4);">$15 у специалистов &nbsp;→&nbsp; <span style="color:var(--brown-light); font-weight:700;">$0.75 в SYNTX</span></span>
+        </div>
+      </div>
+      <div class="price-vs">
+        <div class="price-vs-box">
+          <div class="price-vs-label">Расходы на профессионалов — в год</div>
+          <div class="price-vs-amount">$10 800</div>
+          <div class="price-vs-note">$900 × 12 месяцев</div>
+        </div>
+        <div class="price-vs-box winner">
+          <div class="price-vs-label">Подписка Syntx ELITE — в год</div>
+          <div class="price-vs-amount">$550</div>
+          <div class="price-vs-note">$45.82 × 12 месяцев</div>
+        </div>
+      </div>
+      <div class="price-saving">
+        <div class="price-saving-label">Ваша экономия в год</div>
+        <div class="price-saving-amount">$10 250</div>
+        <div class="price-saving-note">Тот же профессиональный уровень — в 20 раз дешевле за каждую единицу контента</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ТАРИФ + КАК ЗАРЕГИСТРИРОВАТЬСЯ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="eyebrow reveal" style="color:var(--sage);">Какой тариф выбрать</div>
+    <h2 class="section-title section-title-light reveal">Единственный тариф, <em>который закроет все нужные вам задачи</em></h2>
+    <p class="section-text section-text-light reveal">Меньших тарифов не хватит даже на месяц, так как никто не учитывает средний брак генераций 50–75%. Даже у профессионалов процент удачных кадров/дублей ~25%.</p>
+    <div class="tariff-block reveal">
+      <div class="tariff-badge">Единственный правильный выбор</div>
+      <div class="tariff-title">Тариф ELITE</div>
+      <div class="tariff-subtitle">Безлимитные генерации всего — фото, видео, аудио, тексты, карусели, обложки.</div>
+      <div class="tariff-features">
+        <div class="tariff-feature">Nano Banana Pro — 120 удачных профессиональных фото в 4K (из 600 генераций)</div>
+        <div class="tariff-feature">Kling Motion Control — 365 готовых экспертных, реалистичных видео в год (из 1095 генераций)</div>
+        <div class="tariff-feature">1 200 дизайнерских картинок для каруселей, постов, обложек, сторис</div>
+        <div class="tariff-feature">Безлимит Chat GPT, Claude, Grok, Gemini, Deepseek, Perplexity — в одном окне</div>
+        <div class="tariff-feature">+25% к реферальным отчислениям — только при активной подписке</div>
+        <div class="tariff-feature">Доступ одновременно к 90+ нейросетям в Telegram-боте и web-версии</div>
+      </div>
+      <div class="tariff-prices">
+        <div class="tariff-price">
+          <div class="tariff-price-amount">$65.46</div>
+          <div class="tariff-price-period">в месяц</div>
+        </div>
+        <div class="tariff-price">
+          <div class="tariff-price-amount">$52.70</div>
+          <div class="tariff-price-period">при оплате на год</div>
+          <div class="tariff-discount">скидка 15%</div>
+        </div>
+        <div class="tariff-price best">
+          <div class="tariff-price-amount">$45.82</div>
+          <div class="tariff-price-period">с промокодом на год</div>
+          <div class="tariff-discount">скидка 30% — максимум</div>
+        </div>
+      </div>
+
+      <div class="register-block">
+        <div class="register-title">⚠️ Не оплачивайте тариф, пока не прочитаете это</div>
+        <div class="register-steps">
+          <div class="register-step">
+            <div class="register-step-num">1</div>
+            <div class="register-step-text">
+              Зарегистрируйтесь через <a href="https://t.me/syntxaibot?start=aff_377840246" target="_blank">Telegram-бота Syntx</a> — это обязательно, чтобы получить одновременный доступ и к боту, и к web-версии сразу. (Ускоряет работу в 2 раза)
+            </div>
+          </div>
+          <div class="register-step">
+            <div class="register-step-num">2</div>
+            <div class="register-step-text">
+              Перед оплатой зайдите на <a href="https://www.youtube.com/@syntxai" target="_blank">официальный YouTube-канал Syntx</a> и найдите промокод на <strong>−15%</strong> в одном из последних видео.
+            </div>
+          </div>
+          <div class="register-step">
+            <div class="register-step-num">3</div>
+            <div class="register-step-text">
+              Выберите тариф <strong>ELITE</strong> и оплатите сразу <strong>на 1 год</strong>. Годовая скидка −15% + промокод −15% = <strong>итого −30%</strong>. Это разовая акция только для новых клиентов при первой оплате. Потом такой возможности, уже никогда не будет.
+            </div>
+          </div>
+        </div>
+        <div class="register-warning">
+          <strong>Важно:</strong> не регистрируйтесь под собой с целью получить реферальные начисления — за это блокируют выплаты по всей сети аккаунтов. Мультиаккаунтинг с одного IP = бан. На долгой дистанции честные партнёрские отношения приносят значительно больше.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 class="cta-title reveal">Начните делать контент<br><span>проще, дешевле, быстрее.</span></h2>
+    <p class="cta-text reveal">Зарегистрируйтесь в Syntx прямо сейчас и получите доступ к 90+ нейросетям уже сегодня.</p>
+    <button class="btn-primary" onclick="redirect()">Зарегистрироваться в Syntx →</button>
+  </div>
+</section>
+
+<footer>
+  <p>Вопросы? Пишите в Telegram Chat Shikardos Team 💬 <a href="https://t.me/shikardosteamchat">@shikardosteamchat</a></p>
+  <p>Подписывайтесь на канал с полезным контентом: <a href="https://t.me/shikardosteam">@shikardosteam</a></p>
+</footer>
+
+<script>
+  const links = [
+    "https://t.me/syntxaibot?start=aff_377840246",
+  ];
+  function redirect() {
+    let c = parseInt(localStorage.getItem('shk_psy_counter') || '0');
+    window.open(links[c % links.length], '_blank');
+    localStorage.setItem('shk_psy_counter', c + 1);
+  }
+
+  // Lightbox
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
